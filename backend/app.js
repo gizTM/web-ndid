@@ -18,8 +18,25 @@ app.use('/', (req, res) => {
   });
 });
 
+// const labels = [ 
+//   [ 'node_id','public_key','master_public_key','role','max_aal','max_ial' ],
+//   [ 'node_id', 'amount' ],
+//   [ 'node_id', 'amount' ],
+//   [ 'node_id', 'amount' ],
+//   [ 'namespace', 'description' ],
+//   [ 'namespace' ],
+//   [ 'service_id', 'service_name' ],
+//   [ 'service_id' ]
+// ]
+
 app.post('/api/registerNode', (req, res) => {
-  
+  var node_id = req.body.node_id;
+  var public_key = req.body.public_key;
+  var master_public_key = req.body.master_public_key;
+  var role = req.body.role;
+  var max_aal = req.body.max_aal;
+  var max_ial = req.body.max_ial;
+  console.log("Post Received: %s %s %s %s %s %s",node_id,public_key,master_public_key,role,max_aal,max_ial);
 });
 
 app.listen(config.httpPort, () => {
