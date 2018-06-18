@@ -1,8 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors')
-const config = require('./config');
-const request = require('request')
+const config = require('./config')
 const axios = require('axios')
 
 const app = express();
@@ -12,7 +11,8 @@ app.use(bodyParser.json());
 
 app.post('/api/registerNode', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
-
+  //*** */
+  // res.send('Success!')
   axios.post('http://10.10.5.134:8080/ndid/registerNode', {
     node_id: req.body.node_id,
     public_key: req.body.public_key,
@@ -33,7 +33,8 @@ app.post('/api/registerNode', (req, res) => {
 
 app.post('/api/setNodeToken', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
-  
+  //*** */
+  // res.send('Success!')
   axios.post('http://10.10.5.134:8080/ndid/setNodeToken', {
     node_id: req.body.node_id,
     amount: req.body.amount
@@ -50,7 +51,8 @@ app.post('/api/setNodeToken', (req, res) => {
 
 app.post('/api/addNodeToken', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
-  
+  //*** */
+  // res.send('Success!')
   axios.post('http://10.10.5.134:8080/ndid/addNodeToken', {
     node_id: req.body.node_id,
     amount: req.body.amount
@@ -67,7 +69,8 @@ app.post('/api/addNodeToken', (req, res) => {
 
 app.post('/api/reduceNodeToken', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
-  
+  //*** */
+  // res.send('Success!')
   axios.post('http://10.10.5.134:8080/ndid/reduceNodeToken', {
     node_id: req.body.node_id,
     amount: req.body.amount
@@ -84,7 +87,8 @@ app.post('/api/reduceNodeToken', (req, res) => {
 
 app.post('/api/addNamespace', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
-  
+  //*** */
+  // res.send('Success!')
   axios.post('http://10.10.5.134:8080/ndid/addNamespace', {
     namespace: req.body.namespace,
     description: req.body.description
@@ -101,7 +105,8 @@ app.post('/api/addNamespace', (req, res) => {
 
 app.post('/api/deleteNamespace', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
-  
+  //*** */
+  // res.send('Success!')
   axios.post('http://10.10.5.134:8080/ndid/deleteNamespace', {
     namespace: req.body.namespace
   })
@@ -117,7 +122,8 @@ app.post('/api/deleteNamespace', (req, res) => {
 
 app.post('/api/addService', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
-  
+  //*** */
+  // res.send('Success!')
   axios.post('http://10.10.5.134:8080/ndid/addService', {
     service_id: req.body.service_id,
     service_name: req.body.service_name
@@ -134,7 +140,8 @@ app.post('/api/addService', (req, res) => {
 
 app.post('/api/deleteService', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
-  
+  //*** */
+  // res.send('Success!')
   axios.post('http://10.10.5.134:8080/ndid/deleteService', {
     service_id: req.body.service_id
   })

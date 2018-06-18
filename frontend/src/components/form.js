@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { callLoading,updateInput } from '../actions/formAction'
 import { ClipLoader } from 'react-spinners'
 import { AvForm, AvField } from 'availity-reactstrap-validation'
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import  'react-notifications/lib/notifications.css'
 
 const labels = [ 
     [ 'node_id','public_key','master_public_key','role','max_aal','max_ial' ],
@@ -35,181 +37,149 @@ const mapDispatchToProps = dispatch => {
                 console.log('body: '+JSON.stringify(value))
                 switch (index) {
                     case 1:
-                        fetch('/api/SetNodeToken', {
-                            method: 'post',
-                            dataType: 'json',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'applicaiton/json'
-                            },
-                            body: JSON.stringify({
-                                node_id: String(value.node_id),
-                                amount: String(value.amount)
-                            })
-                        }).then(response => 
-                            response.json()
-                        ).then(response => 
+                        fetch('/api/setNodeToken', {
+                            node_id: value.node_id,
+                            amount: value.amount
+                        })
+                        // .then(response => {
+                        //     return response.json()
+                        // })
+                        .then(response => 
                             console.log('res: '+response)
                         ).then(data => {
-                            alert('form submitted')
+                            NotificationManager.success('set node token succeded','Form submitted!')
+                            dispatch(callLoading(false))
                         }).catch(err => {
-                            alert('err from server: '+err)
+                            NotificationManager.error(err, 'Error from server!');
+                            dispatch(callLoading(false))
                         });
                         break
                     case 2:
-                        fetch('/api/AddNodeToken', {
-                            method: 'post',
-                            dataType: 'json',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'applicaiton/json'
-                            },
-                            body: JSON.stringify({
-                                node_id: String(value.node_id),
-                                amount: String(value.amount)
-                            })
-                        }).then(response => 
-                            response.json()
-                        ).then(response => 
+                        fetch('/api/addNodeToken', {
+                            node_id: value.node_id,
+                            amount: value.amount
+                        })
+                        // .then(response => 
+                        //     response.json()
+                        // )
+                        .then(response => 
                             console.log('res: '+response)
                         ).then(data => {
-                            alert('form submitted')
+                            NotificationManager.success('add node token succeded','Form submitted!')
+                            dispatch(callLoading(false))
                         }).catch(err => {
-                            alert('err from server: '+err)
+                            NotificationManager.error(err, 'Error from server!');
+                            dispatch(callLoading(false))
                         });
                         break
                     case 3:
-                        fetch('/api/ReduceNodeToken', {
-                            method: 'post',
-                            dataType: 'json',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'applicaiton/json'
-                            },
-                            body: JSON.stringify({
-                                node_id: String(value.node_id),
-                                amount: String(value.amount)
-                            })
-                        }).then(response => 
-                            response.json()
-                        ).then(response => 
+                        fetch('/api/reduceNodeToken', {
+                            node_id: value.node_id,
+                            amount: value.amount
+                        })
+                        // .then(response => 
+                        //     response.json()
+                        // )
+                        .then(response => 
                             console.log('res: '+response)
                         ).then(data => {
-                            alert('form submitted')
+                            NotificationManager.success('reduce node token succeded','Form submitted!')
+                            dispatch(callLoading(false))
                         }).catch(err => {
-                            alert('err from server: '+err)
+                            NotificationManager.error(err, 'Error from server!');
+                            dispatch(callLoading(false))
                         });
                         break
                     case 4:
-                        fetch('/api/AddNamespace', {
-                            method: 'post',
-                            dataType: 'json',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'applicaiton/json'
-                            },
-                            body: JSON.stringify({
-                                namespace: String(value.namespace),
-                                description: String(value.description)
-                            })
-                        }).then(response => 
-                            response.json()
-                        ).then(response => 
+                        fetch('/api/addNamespace', {
+                            namespace: value.namespace,
+                            description: value.description
+                        })
+                        // .then(response => 
+                        //     response.json()
+                        // )
+                        .then(response => 
                             console.log('res: '+response)
                         ).then(data => {
-                            alert('form submitted')
+                            NotificationManager.success('add namespace succeded','Form submitted!')
+                            dispatch(callLoading(false))
                         }).catch(err => {
-                            alert('err from server: '+err)
+                            NotificationManager.error(err, 'Error from server!');
+                            dispatch(callLoading(false))
                         });
                         break
                     case 5:
-                        fetch('/api/DeleteNamespace', {
-                            method: 'post',
-                            dataType: 'json',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'applicaiton/json'
-                            },
-                            body: JSON.stringify({
-                                namespace: String(value.namespace)
-                            })
-                        }).then(response => 
-                            response.json()
-                        ).then(response => 
+                        fetch('/api/deleteNamespace', {
+                            namespace: value.namespace
+                        })
+                        // .then(response => 
+                        //     response.json()
+                        // )
+                        .then(response => 
                             console.log('res: '+response)
                         ).then(data => {
-                            alert('form submitted')
+                            NotificationManager.success('delete namespace succeded','Form submitted!')
+                            dispatch(callLoading(false))
                         }).catch(err => {
-                            alert('err from server: '+err)
+                            NotificationManager.error(err, 'Error from server!');
+                            dispatch(callLoading(false))
                         });
                         break
                     case 6:
-                        fetch('/api/AddService', {
-                            method: 'post',
-                            dataType: 'json',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'applicaiton/json'
-                            },
-                            body: JSON.stringify({
-                                service_id: String(value.service_id),
-                                service_name: String(value.service_name)
-                            })
-                        }).then(response => 
-                            response.json()
-                        ).then(response => 
+                        fetch('/api/addService', {
+                            service_id: value.service_id,
+                            service_name: value.service_name
+                        })
+                        // .then(response => 
+                        //     response.json()
+                        // )
+                        .then(response => 
                             console.log('res: '+response)
                         ).then(data => {
-                            alert('form submitted')
+                            NotificationManager.success('add service succeded','Form submitted!')
+                            dispatch(callLoading(false))
                         }).catch(err => {
-                            alert('err from server: '+err)
+                            NotificationManager.error(err, 'Error from server!');
+                            dispatch(callLoading(false))
                         });
                         break
                     case 7:
-                        fetch('/api/AddService', {
-                            method: 'post',
-                            dataType: 'json',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'applicaiton/json'
-                            },
-                            body: JSON.stringify({
-                                service_id: String(value.service_id)
-                            })
-                        }).then(response => 
-                            response.json()
-                        ).then(response => 
+                        fetch('/api/deleteService', {
+                            service_id: value.service_id
+                        })
+                        // .then(response => 
+                        //     response.json()
+                        // )
+                        .then(response => 
                             console.log('res: '+response)
                         ).then(data => {
-                            alert('form submitted')
+                            NotificationManager.success('delete service succeded','Form submitted!')
+                            dispatch(callLoading(false))
                         }).catch(err => {
-                            alert('err from server: '+err)
+                            NotificationManager.error(err, 'Error from server!');
+                            dispatch(callLoading(false))
                         });
                         break
                     default:
-                        fetch('/api/RegisterNode', {
-                            method: 'post',
-                            dataType: 'json',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'applicaiton/json'
-                            },
-                            body: JSON.stringify({
-                                node_id: String(value.node_id),
-                                public_key: String(value.public_key),
-                                master_public_key: String(value.master_public_key),
-                                role: String(value.role),
-                                max_aal: String(value.max_aal),
-                                max_ial: String(value.max_ial)
-                            })
-                        }).then(response => 
-                            response.json()
-                        ).then(response => 
+                        fetch('/api/registerNode', {
+                            node_id: value.node_id,
+                            public_key: value.public_key,
+                            master_public_key: value.master_public_key,
+                            role: value.role,
+                            max_aal: value.max_aal,
+                            max_ial: value.max_ial
+                        })
+                        // .then(response => 
+                        //     response.json()
+                        // )
+                        .then(response => 
                             console.log('res: '+response)
                         ).then(data => {
-                            alert('form submitted')
+                            NotificationManager.success('register node succeded','Form submitted!')
+                            dispatch(callLoading(false))
                         }).catch(err => {
-                            alert('err from server: '+err)
+                            NotificationManager.error(err, 'Error from server!');
+                            dispatch(callLoading(false))
                         });
                         break
                 }
@@ -242,6 +212,7 @@ class APIForm extends React.Component {
                     <Button>Submit</Button>
                     {loading?<span  style={{marginLeft:'10px',display:'inline-block'}}><ClipLoader color={'#ccc'} loading={loading}/></span>:''}
                 </Row>
+            <NotificationContainer />
             </AvForm> 
         )
     }
