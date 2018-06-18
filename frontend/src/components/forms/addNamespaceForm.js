@@ -34,7 +34,8 @@ const mapDispatchToProps = dispatch => {
                     NotificationManager.success('add namespace succeded','Form submitted!')
                     dispatch(callLoading(false))
                 }).catch(err => {
-                    NotificationManager.error(err, 'Error from server!');
+                    NotificationManager.error(JSON.stringify(err), 'Error from server!',30000);
+                    console.log('error: ',err)
                     dispatch(callLoading(false))
                 });
             }

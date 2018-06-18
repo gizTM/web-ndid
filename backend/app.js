@@ -97,7 +97,7 @@ app.post('/api/addNamespace', (req, res) => {
     console.log(response);
     res.send('Success!')
   })
-  .catch(error => {
+  .catch(error => { 
     console.log(error);
     res.status(error.statuscode).end()
   });

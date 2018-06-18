@@ -38,7 +38,7 @@ const mapDispatchToProps = dispatch => {
                     NotificationManager.success('register node succeded','Form submitted!')
                     dispatch(callLoading(false))
                 }).catch(err => {
-                    NotificationManager.error(err, 'Error from server!');
+                    NotificationManager.error(JSON.stringify(err), 'Error from server!',30000);
                     dispatch(callLoading(false))
                 });
             }
