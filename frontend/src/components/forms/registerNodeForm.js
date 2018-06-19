@@ -6,7 +6,7 @@ import { callLoading } from '../../actions/formAction'
 import { ClipLoader } from 'react-spinners'
 import { AvForm, AvField } from 'availity-reactstrap-validation'
 import { fetch } from '../../services/webservice'
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import  'react-notifications/lib/notifications.css'
 
 const mapStateToProps = state => {
@@ -28,17 +28,14 @@ const mapDispatchToProps = dispatch => {
                         max_aal: value.max_aal,
                         max_ial: value.max_ial
                     }
-                )
-                // .then(response => 
-                //     response.json()
-                // )
-                .then(response => 
+                ).then(response => 
                     console.log('res: '+response)
                 ).then(data => {
-                    NotificationManager.success('register node succeded','Form submitted!')
+                    NotificationManager.success('registering node succeeded','Form submitted!')
                     dispatch(callLoading(false))
                 }).catch(err => {
-                    NotificationManager.error(JSON.stringify(err), 'Error from server!',30000);
+                    console.log('err: ',JSON.stringify(err))
+                    NotificationManager.error('Status code: '+err.response.status+'\n'+err.response.data.message, 'Error registering node',5000);
                     dispatch(callLoading(false))
                 });
             }
@@ -53,7 +50,7 @@ class RegisterNodeForm extends React.Component {
 
         return (
             <div>
-            <AvForm onValidSubmit={(event,value) => onSubmitClick(event,value,true,this.refs.notificationSystem)} onInvalidSubmit={(event,value) => onSubmitClick(event,value,false,this.props.labels)}>
+            <AvForm onValidSubmit={(event,value) => onSubmitClick(event,value,true)} onInvalidSubmit={(event,value) => onSubmitClick(event,value,false)}>
                 <Label>{menus[0]}</Label>
                 <hr/>
                 <FormGroup row key='node_id'>
@@ -79,10 +76,9 @@ class RegisterNodeForm extends React.Component {
                     <Col sm={12-labelWidth}>
                         {/* <AvField name='role' type="text" required /> */}
                         <AvField type="select" name='role'>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
+                            <option>rp</option>
+                            <option>idp</option>
+                            <option>as</option>
                         </AvField>
                     </Col>
                 </FormGroup>
@@ -92,16 +88,25 @@ class RegisterNodeForm extends React.Component {
                         {/* <AvField name='max_aal' type="number" required /> */}
                         <AvField type="select" name='max_aal'>
                             <option>1</option>
-                            <option>2</option>
+                            <option>2.1</option>
+                            <option>2.2</option>
                             <option>3</option>
-                            <option>4</option>
                         </AvField>
                     </Col>
                 </FormGroup>
                 <FormGroup row key='max_ial'>
                     <Label for='max_ial' sm={labelWidth}>max_ial</Label>
                     <Col sm={12-labelWidth}>
-                        <AvField name='max_ial' type="number" required />
+                        {/* <AvField name='max_ial' type="number" required /> */}
+                        <AvField type="select" name='max_aal'>
+                            <option>1.1</option>
+                            <option>1.2</option>
+                            <option>1.3</option>
+                            <option>2.1</option>
+                            <option>2.2</option>
+                            <option>2.3</option>
+                            <option>3</option>
+                        </AvField>
                     </Col>
                 </FormGroup>
                 <Row className="justify-content-center">

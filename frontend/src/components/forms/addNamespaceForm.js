@@ -31,11 +31,11 @@ const mapDispatchToProps = dispatch => {
                 .then(response => 
                     console.log('res: '+response)
                 ).then(data => {
-                    NotificationManager.success('add namespace succeded','Form submitted!')
+                    NotificationManager.success('adding namespace succeeded','Form submitted!')
                     dispatch(callLoading(false))
                 }).catch(err => {
-                    NotificationManager.error(JSON.stringify(err), 'Error from server!',30000);
-                    console.log('error: ',err)
+                    console.log('err: ',JSON.stringify(err))
+                    NotificationManager.error('Status code: '+err.response.status+'\n'+err.response.data.message, 'Error adding namespace',5000);
                     dispatch(callLoading(false))
                 });
             }

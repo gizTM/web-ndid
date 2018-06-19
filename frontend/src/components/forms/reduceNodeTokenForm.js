@@ -31,10 +31,11 @@ const mapDispatchToProps = dispatch => {
                 .then(response => 
                     console.log('res: '+response)
                 ).then(data => {
-                    NotificationManager.success('reduce node token succeded','Form submitted!')
+                    NotificationManager.success('reducing node token succeeded','Form submitted!')
                     dispatch(callLoading(false))
                 }).catch(err => {
-                    NotificationManager.error(JSON.stringify(err), 'Error from server!',30000);
+                    console.log('err: ',JSON.stringify(err))
+                    NotificationManager.error('Status code: '+err.response.status+'\n'+err.response.data.message, 'Error reducing node token',5000);
                     dispatch(callLoading(false))
                 });
             }

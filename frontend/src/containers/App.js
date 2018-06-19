@@ -8,7 +8,7 @@ import ReduceNodeTokenForm from '../components/forms/reduceNodeTokenForm'
 import AddNamespaceForm from '../components/forms/addNamespaceForm'
 import DeleteNamespaceForm from '../components/forms/deleteNamespaceForm'
 import AddServiceForm from '../components/forms/addServiceForm'
-import DeleteServiceForm from '../components/forms/deleteService'
+import DeleteServiceForm from '../components/forms/deleteServiceForm'
 import { connect } from 'react-redux'
 // import { Menu } from '../components/navMenu'
 import { Sidebar, SidebarItem } from 'react-responsive-sidebar';
