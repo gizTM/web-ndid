@@ -1,0 +1,7 @@
+version: '3'
+services:
+  service-mgmt:
+    image: ndid-service-mgmt:latest
+    ports:
+    - "2201:2201"
+    - "8443:8443"
