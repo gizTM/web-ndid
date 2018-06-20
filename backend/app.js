@@ -1,13 +1,26 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors')
-const config = require('./config')
+const cors = require('cors');
 const axios = require('axios')
+const https = require('https');
+const fs = require('fs');
+const url = require('url');
+const config = require('./config');
 
 const app = express();
 app.use(cors()) // Allow CORS
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// If HTTPS is enabled, redirect HTTP request to HTTPS
+app.use((req, res, next) => { 
+  if (config.https && !/https/.test(req.protocol)) {
+    return res.redirect(307, 'https://' + url.parse('http://' + req.headers.host).hostname
+      + (':' + (config.httpsPort)) + req.url);
+  } else {
+    next();
+  }
+});
 
 app.post('/api/registerNode', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
@@ -19,7 +32,6 @@ app.post('/api/registerNode', (req, res) => {
     master_public_key: req.body.master_public_key,
     role: req.body.role,
     max_aal: parseFloat(req.body.max_aal),
-    // max_ial: 'asdf'
     max_ial: parseFloat(req.body.max_ial)
   }), {
     headers: {
@@ -215,6 +227,42 @@ app.use('/', (req, res) => {
   });
 });
 
-app.listen(config.httpPort, () => {
-  console.log('Listening on port ' + config.httpPort);
-})
+
+// Create HTTP server and HTTPS server
+const httpServer = app.listen(config.httpPort);
+console.log('Listening on HTTP port ' + config.httpPort);
+
+const httpsOptions = {
+  key: fs.readFileSync(config.httpsKeyPath),
+  cert: fs.readFileSync(config.httpsCertPath)
+};
+const httpsServer = https.createServer(httpsOptions, app).listen(config.httpsPort);
+console.log('Listening on HTTPS port ' + config.httpsPort);
+
+// Shutdown
+
+function shutdown() {
+  console.log('Received kill signal, shutting down gracefully');
+  httpServer.close(() => {
+    console.log('Closed out remaining HTTP connection(s)');
+
+    if (httpsServer) {
+      httpsServer.close(() => {
+        console.log('Closed out remaining HTTPS connection(s)');
+        process.exit(0);
+      });
+    } else {
+      process.exit(0);
+    }
+  });
+
+  
+
+  setTimeout(() => {
+    console.log('Could not close connections in time, forcefully shutting down');
+    process.exit(1);
+  }, 10000);
+}
+
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);
