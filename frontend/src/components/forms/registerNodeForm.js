@@ -47,10 +47,19 @@ class RegisterNodeForm extends React.Component {
     render() {
         const labelWidth = 5
         const { loading,onSubmitClick } = this.props
+        const defaultValues = {
+            role: 'rp',
+            max_aal: 1,
+            max_ial: 1.1
+        }
 
         return (
             <div>
-            <AvForm onValidSubmit={(event,value) => onSubmitClick(event,value,true)} onInvalidSubmit={(event,value) => onSubmitClick(event,value,false)}>
+            <AvForm 
+                onValidSubmit={(event,value) => onSubmitClick(event,value,true)} 
+                onInvalidSubmit={(event,value) => onSubmitClick(event,value,false)}
+                model={defaultValues}
+            >
                 <Label>{menus[0]}</Label>
                 <hr/>
                 <FormGroup row key='node_id'>
