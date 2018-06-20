@@ -98,7 +98,7 @@ class RegisterNodeForm extends React.Component {
                     <Label for='max_ial' sm={labelWidth}>max_ial</Label>
                     <Col sm={12-labelWidth}>
                         {/* <AvField name='max_ial' type="number" required /> */}
-                        <AvField type="select" name='max_aal'>
+                        <AvField type="select" name='max_ial'>
                             <option>1.1</option>
                             <option>1.2</option>
                             <option>1.3</option>
