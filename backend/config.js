@@ -1,7 +1,12 @@
 const path = require("path")
 
 const config = {
-  httpPort: 2201,
+  httpPort: process.env.HTTP_PORT || 2201,
+  httpsPort: process.env.HTTPS_PORT || 8443,
+  https: process.env.HTTPS || true,
+  ndidApiIp: process.env.NDID_API_IP,
+  ndidApiPort: process.env.NDID_API_PORT,
+  ndidApiHttps: process.env.NDID_API_HTTPS || false,
   staticFolder: path.join(__dirname, 'public')
 }
 

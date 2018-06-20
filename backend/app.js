@@ -13,7 +13,7 @@ app.post('/api/registerNode', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
   //*** */
   // res.send('Success!')
-  axios.post('http://10.10.5.134:8080/ndid/registerNode', JSON.stringify({
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/registerNode`, JSON.stringify({
     node_id: req.body.node_id,
     public_key: req.body.public_key,
     master_public_key: req.body.master_public_key,
@@ -24,7 +24,7 @@ app.post('/api/registerNode', (req, res) => {
   }), {
     headers: {
       'Content-Type': 'application/json',
-  }
+    }
   })
   .then(response => {
     console.log('response: '+response);
@@ -42,7 +42,7 @@ app.post('/api/setNodeToken', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
   //*** */
   // res.send('Success!')
-  axios.post('http://10.10.5.134:8080/ndid/setNodeToken', JSON.stringify({
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/setNodeToken`, JSON.stringify({
     node_id: req.body.node_id,
     amount: parseInt(req.body.amount)
   }), {
@@ -66,7 +66,7 @@ app.post('/api/addNodeToken', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
   //*** */
   // res.send('Success!')
-  axios.post('http://10.10.5.134:8080/ndid/addNodeToken', JSON.stringify({
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/addNodeToken`, JSON.stringify({
     node_id: req.body.node_id,
     amount: parseInt(req.body.amount)
   }), {
@@ -90,7 +90,7 @@ app.post('/api/reduceNodeToken', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
   //*** */
   // res.send('Success!')
-  axios.post('http://10.10.5.134:8080/ndid/reduceNodeToken', JSON.stringify({
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/reduceNodeToken`, JSON.stringify({
     node_id: req.body.node_id,
     amount: parseInt(req.body.amount)
   }), {
@@ -114,7 +114,7 @@ app.post('/api/addNamespace', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
   //*** */
   // res.send('Success!')
-  axios.post('http://10.10.5.134:8080/ndid/namespaces', JSON.stringify({
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/namespaces`, JSON.stringify({
     namespace: req.body.namespace,
     description: req.body.description
   }), {
@@ -139,7 +139,7 @@ app.post('/api/deleteNamespace', (req, res) => {
   // console.log('req.params: ',JSON.stringify(req.params))
   //*** */
   // res.send('Success!')
-  axios.delete('http://10.10.5.134:8080/ndid/namespaces/'+req.body.namespace, JSON.stringify({
+  axios.delete(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/namespaces/` + req.body.namespace, JSON.stringify({
     namespace: req.body.namespace
   }), {
     headers: {
@@ -162,7 +162,7 @@ app.post('/api/addService', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
   //*** */
   // res.send('Success!')
-  axios.post('http://10.10.5.134:8080/ndid/services', JSON.stringify({
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/services`, JSON.stringify({
     service_id: req.body.service_id,
     service_name: req.body.service_name
   }), {
@@ -186,7 +186,7 @@ app.post('/api/deleteService', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
   //*** */
   // res.send('Success!')
-  axios.delete('http://10.10.5.134:8080/ndid/services/'+req.body.service_id, JSON.stringify({
+  axios.delete(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/services/` + req.body.service_id, JSON.stringify({
     service_id: req.body.service_id
   }), {
     headers: {
