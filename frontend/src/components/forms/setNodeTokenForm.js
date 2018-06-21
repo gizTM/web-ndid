@@ -73,7 +73,6 @@ class SetNodeTokenForm extends React.Component {
                         {loading?<span  style={{marginLeft:'10px',display:'inline-block'}}><ClipLoader color={'#ccc'} loading={loading}/></span>:''}
                     </Row>
                 </AvForm>
-                <NotificationSystem ref='notiSystem' />
                 <NotificationContainer />
             </div>
         )
