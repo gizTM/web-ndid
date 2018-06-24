@@ -71,13 +71,13 @@ class RegisterNodeForm extends React.Component {
                 <FormGroup row key='public_key'>
                     <Label for='public_key' sm={labelWidth}>public_key</Label>
                     <Col sm={12-labelWidth}>
-                        <AvField name='public_key' type="text" required />
+                        <AvField name='public_key' type="textarea" required />
                     </Col>
                 </FormGroup>
                 <FormGroup row key='master_public_key'>
                     <Label for='master_public_key' sm={labelWidth}>master_public_key</Label>
                     <Col sm={12-labelWidth}>
-                        <AvField name='master_public_key' type="text" required />
+                        <AvField name='master_public_key' type="textarea" required />
                     </Col>
                 </FormGroup>
                 <FormGroup row key='role'>
