@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import './App.css';
 import { Container, Row, Col } from 'reactstrap'
+import InitNDIDForm from '../components/forms/initNDIDForm'
 import RegisterNodeForm from '../components/forms/registerNodeForm'
 import SetNodeTokenForm from '../components/forms/setNodeTokenForm'
 import AddNodeTokenForm from '../components/forms/addNodeTokenForm'
@@ -16,7 +17,7 @@ import { selectMenu } from '../actions/menuAction'
 // import APIForm from '../components/form'
 
 const menus = [
-  'Register node','Set node token','Add node token','Reduce node token','Add namespace','Delete namespace','Add service','Delete service'  
+  'Init NDID','Register node','Set node token','Add node token','Reduce node token','Add namespace','Delete namespace','Add service','Delete service'
   ];
 
 const mapStateToProps = state => {
@@ -33,26 +34,29 @@ const mapStateToProps = state => {
         console.log('menu selected: ',menu.children.props.children[0].props.children)
         let x = 0
         switch (menu.children.props.children[0].props.children) {
-          case 'Set node token': 
+          case 'Register node':
             x = 1
             break
-          case 'Add node token':
+          case 'Set node token': 
             x = 2
             break
-          case 'Reduce node token':
+          case 'Add node token':
             x = 3
             break
-          case 'Add namespace':
+          case 'Reduce node token':
             x = 4
             break
-          case 'Delete namespace':
+          case 'Add namespace':
             x = 5
             break
-          case 'Add service':
+          case 'Delete namespace':
             x = 6
             break
-          case 'Delete service':
+          case 'Add service':
             x = 7
+            break
+          case 'Delete service':
+            x = 8
             break
           default:
             x = 0
@@ -80,14 +84,15 @@ class App extends Component {
         <Container style={{padding: '20px'}}>
           <Row style={style}>
             {/* <Col xs="6" sm="3" style={style}><Menu /></Col> */}
-            {this.props.menu === 0 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <RegisterNodeForm /> </Col>}
-            {this.props.menu === 1 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <SetNodeTokenForm /> </Col>}
-            {this.props.menu === 2 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <AddNodeTokenForm /> </Col>}
-            {this.props.menu === 3 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <ReduceNodeTokenForm /> </Col>}
-            {this.props.menu === 4 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <AddNamespaceForm /> </Col>}
-            {this.props.menu === 5 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <DeleteNamespaceForm /> </Col>}
-            {this.props.menu === 6 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <AddServiceForm  /> </Col>}
-            {this.props.menu === 7 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <DeleteServiceForm /> </Col>}
+            {this.props.menu === 0 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <InitNDIDForm /> </Col>}
+            {this.props.menu === 1 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <RegisterNodeForm /> </Col>}
+            {this.props.menu === 2 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <SetNodeTokenForm /> </Col>}
+            {this.props.menu === 3 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <AddNodeTokenForm /> </Col>}
+            {this.props.menu === 4 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <ReduceNodeTokenForm /> </Col>}
+            {this.props.menu === 5 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <AddNamespaceForm /> </Col>}
+            {this.props.menu === 6 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <DeleteNamespaceForm /> </Col>}
+            {this.props.menu === 7 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <AddServiceForm  /> </Col>}
+            {this.props.menu === 8 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <DeleteServiceForm /> </Col>}
             {/* <APIForm labels={menu}/> */}
           </Row>
         </Container>

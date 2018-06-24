@@ -21,9 +21,8 @@ const mapDispatchToProps = dispatch => {
         onSubmitClick: (event,value,loading) => {
             if(loading) {
                 dispatch(callLoading(loading))
-                fetch('/api/setNodeToken', {
-                        node_id: value.node_id,
-                        amount: value.amount
+                fetch('/api/initNDID', {
+                        public_key: value.public_key
                     }
                 )
                 // .then(response => {
@@ -32,11 +31,11 @@ const mapDispatchToProps = dispatch => {
                 .then(response => 
                     console.log('res: '+response)
                 ).then(data => {
-                    NotificationManager.success('setting node token succeeded','Form submitted!')
+                    NotificationManager.success('initiating NDID succeeded','Form submitted!')
                     dispatch(callLoading(false))
                 }).catch(err => {
                     console.log('err: ',JSON.stringify(err))
-                    NotificationManager.error('Status code: '+err.response.status+'\n'+err.response.data.message, 'Error setting node token',5000);
+                    NotificationManager.error('Status code: '+err.response.status+'\n'+err.response.data.message, 'Error initiating NDID',5000);
                     dispatch(callLoading(false))
                 });
             }
@@ -44,7 +43,7 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-class SetNodeTokenForm extends React.Component {
+class InitNDIDForm extends React.Component {
     render() {
         const labelWidth = 5
         const { loading,onSubmitClick } = this.props
@@ -52,18 +51,12 @@ class SetNodeTokenForm extends React.Component {
         return (
             <div>
                 <AvForm onValidSubmit={(event,value) => onSubmitClick(event,value,true,this.refs.notiSystem)} onInvalidSubmit={(event,value) => onSubmitClick(event,value,false)}>
-                    <Label>{menus[1]}</Label>
+                    <Label>{menus[8]}</Label>
                     <hr/>
-                    <FormGroup row key='node_id'>
-                        <Label for='node_id' sm={labelWidth}>node_id</Label>
+                    <FormGroup row key='public_key'>
+                        <Label for='public_key' sm={labelWidth}>public_key</Label>
                         <Col sm={12-labelWidth}>
-                            <AvField name='node_id' type="text" required />
-                        </Col>
-                    </FormGroup>
-                    <FormGroup row key='amount'>
-                        <Label for='amount' sm={labelWidth}>amount</Label>
-                        <Col sm={12-labelWidth}>
-                            <AvField name='amount' type="number" required />
+                            <AvField name='public_key' type="textarea" required />
                         </Col>
                     </FormGroup>
                     <Row className="justify-content-center">
@@ -77,4 +70,4 @@ class SetNodeTokenForm extends React.Component {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(SetNodeTokenForm)
+export default connect(mapStateToProps,mapDispatchToProps)(InitNDIDForm)
