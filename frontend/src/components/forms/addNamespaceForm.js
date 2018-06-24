@@ -17,7 +17,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSubmitClick: (event,value,loading,notificationSystem) => {
+        onSubmitClick: (value,loading) => {
             if(loading) {
                 dispatch(callLoading(loading))
                 fetch('/api/addNamespace', {
@@ -49,7 +49,7 @@ class AddNamespaceForm extends React.Component {
         const { loading,onSubmitClick } = this.props
 
         return (
-            <AvForm onValidSubmit={(event,value) => onSubmitClick(event,value,true)} onInvalidSubmit={(event,value) => onSubmitClick(false)}>
+            <AvForm onValidSubmit={(event,value) => onSubmitClick(event,value,true)} onInvalidSubmit={(event,value) => onSubmitClick(event,value,false)}>
                 <Label>{menus[4]}</Label>
                 <hr/>
                 <FormGroup row key='namespace'>

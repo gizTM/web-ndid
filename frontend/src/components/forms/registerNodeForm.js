@@ -26,7 +26,8 @@ const mapDispatchToProps = dispatch => {
                         master_public_key: value.master_public_key,
                         role: value.role,
                         max_aal: value.max_aal,
-                        max_ial: value.max_ial
+                        max_ial: value.max_ial,
+                        node_name: value.node_name
                     }
                 ).then(response => 
                     console.log('res: '+response)

@@ -51,7 +51,7 @@ class SetNodeTokenForm extends React.Component {
 
         return (
             <div>
-                <AvForm onValidSubmit={(event,value) => onSubmitClick(event,value,true,this.refs.notiSystem)} onInvalidSubmit={(event,value) => onSubmitClick(event,value,false)}>
+                <AvForm onValidSubmit={(event,value) => onSubmitClick(event,value,true)} onInvalidSubmit={(event,value) => onSubmitClick(event,value,false)}>
                     <Label>{menus[1]}</Label>
                     <hr/>
                     <FormGroup row key='node_id'>
