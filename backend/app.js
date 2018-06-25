@@ -248,6 +248,29 @@ app.post('/api/deleteService', (req, res) => {
   });
 });
 
+app.post('/api/validator', (req, res) => {
+  console.log('req.body: '+JSON.stringify(req.body))
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/validator`, JSON.stringify({
+    public_key: req.body.public_key,
+    power: parseInt(req.body.power, 10)
+  }), {
+    headers: {
+      'Content-Type': 'application/json',
+    }, 
+    httpsAgent: agent 
+  })
+  .then(response => {
+    console.log('response: '+response);
+    res.send('Success!')
+  })
+  .catch(error => {
+    console.log('error: ', error.toString());
+    res.status(error.response.status).json({
+      message: (error.response.data && error.response.data.error) ? error.response.data.error.message : error.response.statusText
+    }).end();
+  });
+});
+
 // Serve static files
 app.use('/', (req, res) => {
   express.static(config.staticFolder, {

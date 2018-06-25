@@ -51,7 +51,7 @@ class InitNDIDForm extends React.Component {
         return (
             <div>
                 <AvForm onValidSubmit={(event,value) => onSubmitClick(event,value,true)} onInvalidSubmit={(event,value) => onSubmitClick(event,value,false)}>
-                    <Label>{menus[8]}</Label>
+                    <Label>{menus[9]}</Label>
                     <hr/>
                     <FormGroup row key='public_key'>
                         <Label for='public_key' sm={labelWidth}>public_key</Label>

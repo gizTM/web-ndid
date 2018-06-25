@@ -10,6 +10,7 @@ import AddNamespaceForm from '../components/forms/addNamespaceForm'
 import DeleteNamespaceForm from '../components/forms/deleteNamespaceForm'
 import AddServiceForm from '../components/forms/addServiceForm'
 import DeleteServiceForm from '../components/forms/deleteServiceForm'
+import RegisterValidatorForm from '../components/forms/registerValidatorForm'
 import { connect } from 'react-redux'
 // import { Menu } from '../components/navMenu'
 import { Sidebar, SidebarItem } from 'react-responsive-sidebar';
@@ -17,8 +18,17 @@ import { selectMenu } from '../actions/menuAction'
 // import APIForm from '../components/form'
 
 const menus = [
-  'Init NDID','Register node','Set node token','Add node token','Reduce node token','Add namespace','Delete namespace','Add service','Delete service'
-  ];
+  'Init NDID',
+  'Register node',
+  'Set node token',
+  'Add node token',
+  'Reduce node token',
+  'Add namespace',
+  'Delete namespace',
+  'Add service',
+  'Delete service',
+  'Register validator'
+];
 
 const mapStateToProps = state => {
     return {
@@ -58,6 +68,9 @@ const mapStateToProps = state => {
           case 'Delete service':
             x = 8
             break
+          case 'Register validator':
+            x = 9
+            break
           default:
             x = 0
             break
@@ -93,6 +106,7 @@ class App extends Component {
             {this.props.menu === 6 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <DeleteNamespaceForm /> </Col>}
             {this.props.menu === 7 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <AddServiceForm  /> </Col>}
             {this.props.menu === 8 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <DeleteServiceForm /> </Col>}
+            {this.props.menu === 9 && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <RegisterValidatorForm /> </Col>}
             {/* <APIForm labels={menu}/> */}
           </Row>
         </Container>

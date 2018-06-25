@@ -5,8 +5,17 @@ import { selectMenu } from '../actions/menuAction'
 import { connect } from 'react-redux'
 
 const menus = [
-  'Register node','Set node token','Add node token','Reduce node token','Add namespace','Delete namespace','Add service','Delete service','Init NDID'
-  ];
+  'Register node',
+  'Set node token',
+  'Add node token',
+  'Reduce node token',
+  'Add namespace',
+  'Delete namespace',
+  'Add service',
+  'Delete service',
+  'Register validator',
+  'Init NDID'
+];
 
 const mapStateToProps = state => {
     return {
