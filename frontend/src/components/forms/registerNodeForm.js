@@ -22,12 +22,12 @@ const mapDispatchToProps = dispatch => {
                 dispatch(callLoading(loading))
                 fetch('/api/registerNode', {
                         node_id: value.node_id,
+                        node_name: value.node_name,
                         public_key: value.public_key,
                         master_public_key: value.master_public_key,
                         role: value.role,
                         max_aal: value.max_aal,
-                        max_ial: value.max_ial,
-                        node_name: value.node_name
+                        max_ial: value.max_ial
                     }
                 ).then(response => 
                     console.log('res: '+response)
@@ -72,7 +72,7 @@ class RegisterNodeForm extends React.Component {
                 <FormGroup row key='node_name'>
                     <Label for='node_name' sm={labelWidth}>node_name</Label>
                     <Col sm={12-labelWidth}>
-                        <AvField name='node_id' type="text" required />
+                        <AvField name='node_name' type="text" required />
                     </Col>
                 </FormGroup>
                 <FormGroup row key='public_key'>

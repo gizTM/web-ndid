@@ -7,8 +7,8 @@ const config = {
   httpsKeyPath: path.join(__dirname, 'keys', 'localhost.key'),
   httpsCertPath: path.join(__dirname, 'keys', 'localhost.crt'),
   ndidApiIp: process.env.NDID_API_IP || '10.10.5.134',
-  ndidApiPort: process.env.NDID_API_PORT || 8080,
-  ndidApiHttps: process.env.NDID_API_HTTPS || false,
+  ndidApiPort: process.env.NDID_API_PORT || 8443,
+  ndidApiHttps: process.env.NDID_API_HTTPS || true,
   staticFolder: path.join(__dirname, 'public')
 }
 

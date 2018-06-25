@@ -22,6 +22,35 @@ app.use((req, res, next) => {
   }
 });
 
+const agent = new https.Agent({  
+  rejectUnauthorized: false
+});
+
+app.post('/api/initNDID', (req, res) => {
+  console.log('req.body: '+JSON.stringify(req.body))
+  //*** */
+  // res.send('Success!')
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/initNDID`, JSON.stringify({
+    public_key: req.body.public_key
+  }), {
+    headers: {
+      'Content-Type': 'application/json',
+    }, httpsAgent: agent 
+  })
+  .then(response => {
+    console.log('response: '+response);
+    res.send('Success!')
+  })
+  .catch(error => {
+    console.log('error message: ', error.toString());
+    console.log('error: ',error)
+    console.log('')
+    res.status(error.response.status).json({
+      message: (error.response.data && error.response.data.error) ? error.response.data.error.message : error.response.statusText
+    }).end();
+  });
+});
+
 app.post('/api/registerNode', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
   //*** */
@@ -32,11 +61,12 @@ app.post('/api/registerNode', (req, res) => {
     master_public_key: req.body.master_public_key,
     role: req.body.role,
     max_aal: parseFloat(req.body.max_aal),
-    max_ial: parseFloat(req.body.max_ial)
+    max_ial: parseFloat(req.body.max_ial),
+    node_name: req.body.node_name
   }), {
     headers: {
       'Content-Type': 'application/json',
-    }
+    }, httpsAgent: agent 
   })
   .then(response => {
     console.log('response: '+response);
@@ -60,7 +90,7 @@ app.post('/api/setNodeToken', (req, res) => {
   }), {
     headers: {
       'Content-Type': 'application/json',
-  }
+    }, httpsAgent: agent 
   })
   .then(response => {
     console.log('response: '+response);
@@ -84,7 +114,7 @@ app.post('/api/addNodeToken', (req, res) => {
   }), {
     headers: {
       'Content-Type': 'application/json',
-  }
+    }, httpsAgent: agent 
   })
   .then(response => {
     console.log('response: '+response);
@@ -108,7 +138,7 @@ app.post('/api/reduceNodeToken', (req, res) => {
   }), {
     headers: {
       'Content-Type': 'application/json',
-  }
+    }, httpsAgent: agent 
   })
   .then(response => {
     console.log('response: '+response);
@@ -132,7 +162,7 @@ app.post('/api/addNamespace', (req, res) => {
   }), {
     headers: {
       'Content-Type': 'application/json',
-  }
+    }, httpsAgent: agent 
   })
   .then(response => {
     console.log('response: '+response);
@@ -151,12 +181,13 @@ app.post('/api/deleteNamespace', (req, res) => {
   // console.log('req.params: ',JSON.stringify(req.params))
   //*** */
   // res.send('Success!')
-  axios.delete(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/namespaces/` + req.body.namespace, JSON.stringify({
-    namespace: req.body.namespace
-  }), {
+  console.log('deleting namespace')
+  axios.delete(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/namespaces/` + req.body.namespace,
+   {
     headers: {
       'Content-Type': 'application/json',
-  }
+    }, 
+    httpsAgent: agent 
   })
   .then(response => {
     console.log('response: '+response);
@@ -180,7 +211,7 @@ app.post('/api/addService', (req, res) => {
   }), {
     headers: {
       'Content-Type': 'application/json',
-  }
+    }, httpsAgent: agent 
   })
   .then(response => {
     console.log('response: '+response);
@@ -198,12 +229,12 @@ app.post('/api/deleteService', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
   //*** */
   // res.send('Success!')
-  axios.delete(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/services/` + req.body.service_id, JSON.stringify({
-    service_id: req.body.service_id
-  }), {
+  axios.delete(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/services/` + req.body.service_id, 
+   {
     headers: {
       'Content-Type': 'application/json',
-  }
+    }, 
+    httpsAgent: agent 
   })
   .then(response => {
     console.log('response: '+response);
