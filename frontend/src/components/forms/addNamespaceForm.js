@@ -17,18 +17,15 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSubmitClick: (value,loading) => {
+        onSubmitClick: (event,value,loading) => {
             if(loading) {
+                // console.log('value body: ',value.namespace+' '+value.description)
                 dispatch(callLoading(loading))
                 fetch('/api/addNamespace', {
                         namespace: value.namespace,
                         description: value.description
                     }
-                )
-                // .then(response => 
-                //     response.json()
-                // )
-                .then(response => 
+                ).then(response => 
                     console.log('res: '+response)
                 ).then(data => {
                     NotificationManager.success('adding namespace succeeded','Form submitted!')
@@ -50,7 +47,7 @@ class AddNamespaceForm extends React.Component {
 
         return (
             <AvForm onValidSubmit={(event,value) => onSubmitClick(event,value,true)} onInvalidSubmit={(event,value) => onSubmitClick(event,value,false)}>
-                <Label>{menus[4]}</Label>
+                <Label>{menus[6]}</Label>
                 <hr/>
                 <FormGroup row key='namespace'>
                     <Label for='namespace' sm={labelWidth}>namespace</Label>
