@@ -1,4 +1,6 @@
-const menuReducer = (menu = 0, action) => {
+import { MENU } from '../constants'
+
+const menuReducer = (menu = MENU.INIT_NDID, action) => {
     switch (action.type) {
       case 'SWITCH_MENU':
         return action.menu

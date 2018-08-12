@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Button, Label, FormGroup } from "reactstrap";
-import { menus } from "../navMenu";
+import { MENU } from '../../constants'
 import { connect } from "react-redux";
 import { callLoading } from "../../actions/formAction";
 import { ClipLoader } from "react-spinners";
@@ -62,7 +62,7 @@ class ApproveServiceForm extends React.Component {
         onValidSubmit={(event, value) => onSubmitClick(event, value, true)}
         onInvalidSubmit={(event, value) => onSubmitClick(event, value, false)}
       >
-        <Label>{menus[6]}</Label>
+        <Label>{MENU.APPROVE_SERVICE}</Label>
         <hr />
         <FormGroup row key="service_id">
           <Label for="service_id" sm={labelWidth}>

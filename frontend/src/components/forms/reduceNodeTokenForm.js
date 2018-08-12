@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Button, Label, FormGroup } from "reactstrap";
-import { menus } from "../navMenu";
+import { MENU } from '../../constants'
 import { connect } from "react-redux";
 import { callLoading } from "../../actions/formAction";
 import { ClipLoader } from "react-spinners";
@@ -63,7 +63,7 @@ class ReduceNodeTokenForm extends React.Component {
                     onSubmitClick(event, value, false)
                 }
             >
-                <Label>{menus[3]}</Label>
+                <Label>{MENU.REDUCE_NODE_TOKEN}</Label>
                 <hr />
                 <FormGroup row key="node_id">
                     <Label for="node_id" sm={labelWidth}>

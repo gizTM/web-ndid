@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Button, Label, FormGroup } from "reactstrap";
-import { menus } from "../navMenu";
+import { MENU } from '../../constants'
 import { connect } from "react-redux";
 import { callLoading } from "../../actions/formAction";
 import { ClipLoader } from "react-spinners";
@@ -62,7 +62,7 @@ class DeleteNamespaceForm extends React.Component {
                     onSubmitClick(event, value, false)
                 }
             >
-                <Label>{menus[5]}</Label>
+                <Label>{MENU.DELETE_NAMESPACE}</Label>
                 <hr />
                 <FormGroup row key="namespace">
                     <Label for="namespace" sm={labelWidth}>

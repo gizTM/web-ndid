@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Button, Label, FormGroup } from "reactstrap";
-import { menus } from "../navMenu";
+import { MENU } from '../../constants'
 import { connect } from "react-redux";
 import { callLoading } from "../../actions/formAction";
 import { ClipLoader } from "react-spinners";
@@ -64,7 +64,7 @@ class InitNDIDForm extends React.Component {
                         onSubmitClick(event, value, false)
                     }
                 >
-                    <Label>{menus[9]}</Label>
+                    <Label>{MENU.INIT_NDID}</Label>
                     <hr />
                     <FormGroup row key="public_key">
                         <Label for="public_key" sm={labelWidth}>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Button, Label, FormGroup } from "reactstrap";
-import { menus } from "../navMenu";
+import { MENU } from '../../constants'
 import { connect } from "react-redux";
 import { callLoading } from "../../actions/formAction";
 import { ClipLoader } from "react-spinners";
@@ -62,7 +62,7 @@ class DeleteServiceForm extends React.Component {
                     onSubmitClick(event, value, false)
                 }
             >
-                <Label>{menus[7]}</Label>
+                <Label>{MENU.DELETE_SERVICE}</Label>
                 <hr />
                 <FormGroup row key="service_id">
                     <Label for="service_id" sm={labelWidth}>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Button, FormGroup, Label } from "reactstrap";
-import { menus } from "../navMenu";
+import { MENU } from '../../constants'
 import { connect } from "react-redux";
 import { callLoading } from "../../actions/formAction";
 import { ClipLoader } from "react-spinners";
@@ -75,7 +75,7 @@ class RegisterNodeForm extends React.Component {
                     }
                     model={defaultValues}
                 >
-                    <Label>{menus[0]}</Label>
+                    <Label>{MENU.REGISTER_NODE}</Label>
                     <hr />
                     <FormGroup row key="node_id">
                         <Label for="node_id" sm={labelWidth}>
