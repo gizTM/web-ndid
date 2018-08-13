@@ -51,6 +51,31 @@ app.post('/api/initNDID', (req, res) => {
   });
 });
 
+app.post('/api/approveService', (req, res) => {
+  console.log('req.body: ' + JSON.stringify(req.body));
+
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/approveService`, JSON.stringify({
+    node_id: req.body.node_id,
+    service_id: req.body.service_id
+  }), {
+    headers: {
+      'Content-Type': 'application/json',
+    }, httpsAgent: agent 
+  })
+  .then(response => {
+    console.log('response: ' + response);
+    res.send('Success!')
+  })
+  .catch(error => {
+    console.log('error message: ', error.toString());
+    console.log('error: ', error)
+    console.log('')
+    res.status(error.response.status).json({
+      message: (error.response.data && error.response.data.error) ? error.response.data.error.message : error.response.statusText
+    }).end();
+  });
+})
+
 app.post('/api/registerNode', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
   //*** */
@@ -79,6 +104,33 @@ app.post('/api/registerNode', (req, res) => {
     }).end();
   });
 });
+
+app.post('/api/updateNode', (req, res) => {
+  console.log('req.body: ' + JSON.stringify(req.body));
+
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/updateNode`, JSON.stringify({
+    node_id: req.body.node_id,
+    node_name: req.body.node_name,
+    max_aal: req.body.max_aal,
+    max_ial: req.body.max_ial,
+  }), {
+    headers: {
+      'Content-Type': 'application/json',
+    }, httpsAgent: agent 
+  })
+  .then(response => {
+    console.log('response: ' + response);
+    res.send('Success!')
+  })
+  .catch(error => {
+    console.log('error message: ', error.toString());
+    console.log('error: ', error)
+    console.log('')
+    res.status(error.response.status).json({
+      message: (error.response.data && error.response.data.error) ? error.response.data.error.message : error.response.statusText
+    }).end();
+  });
+})
 
 app.post('/api/setNodeToken', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
@@ -225,6 +277,31 @@ app.post('/api/addService', (req, res) => {
   });
 });
 
+app.post('/api/updateService', (req, res) => {
+  console.log('req.body: ' + JSON.stringify(req.body));
+
+  axios.post(
+    `http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/services/${req.body.service_id}`, 
+    JSON.stringify({ service_name: req.body.service_name }), 
+    {
+      headers: { 'Content-Type': 'application/json' }, 
+      httpsAgent: agent 
+    }
+  )
+  .then(response => {
+    console.log('response: ' + response);
+    res.send('Success!')
+  })
+  .catch(error => {
+    console.log('error message: ', error.toString());
+    console.log('error: ', error)
+    console.log('')
+    res.status(error.response.status).json({
+      message: (error.response.data && error.response.data.error) ? error.response.data.error.message : error.response.statusText
+    }).end();
+  });
+})
+
 app.post('/api/deleteService', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
   //*** */
@@ -253,6 +330,27 @@ app.post('/api/validator', (req, res) => {
   axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/validator`, JSON.stringify({
     public_key: req.body.public_key,
     power: parseInt(req.body.power, 10)
+  }), {
+    headers: {
+      'Content-Type': 'application/json',
+    }, 
+    httpsAgent: agent 
+  })
+  .then(response => {
+    console.log('response: '+response);
+    res.send('Success!')
+  })
+  .catch(error => {
+    console.log('error: ', error.toString());
+    res.status(error.response.status).json({
+      message: (error.response.data && error.response.data.error) ? error.response.data.error.message : error.response.statusText
+    }).end();
+  });
+});
+
+app.post('/api/setTimeoutBlockRegisterMqDestination', (req, res) => {
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/setTimeoutBlockRegisterMqDestination`, JSON.stringify({
+    blocks_to_timeout: req.body.blocks_to_timeout
   }), {
     headers: {
       'Content-Type': 'application/json',

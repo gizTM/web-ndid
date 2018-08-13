@@ -24,13 +24,13 @@ const mapDispatchToProps = dispatch => {
             if (loading) {
                 dispatch(callLoading(loading));
 
-                post("/api/approveService", {
-                    node_id: value.node_id,
-                    service_id: value.service_id
+                post("/api/updateService", {
+                    service_id: value.service_id,
+                    service_name: value.service_name
                 })
                     .then(data => {
                         NotificationManager.success(
-                            "approving service succeeded",
+                            "updating service succeeded",
                             "Form submitted!"
                         );
                         dispatch(callLoading(false));
@@ -39,7 +39,7 @@ const mapDispatchToProps = dispatch => {
                         NotificationManager.error(
                             `Status code: ${err.response.status}
                             err.response.data.message`,
-                            "Error approving service",
+                            "Error updating service",
                             5000
                         );
                         dispatch(callLoading(false));
@@ -49,7 +49,7 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-class ApproveServiceForm extends React.Component {
+class UpdateServiceForm extends React.Component {
     render() {
         const labelWidth = 5;
         const { loading, onSubmitClick } = this.props;
@@ -63,16 +63,8 @@ class ApproveServiceForm extends React.Component {
                     onSubmitClick(event, value, false)
                 }
             >
-                <Label>{MENU.APPROVE_SERVICE}</Label>
+                <Label>{MENU.UPDATE_SERVICE}</Label>
                 <hr />
-                <FormGroup row key="node_id">
-                    <Label for="node_id" sm={labelWidth}>
-                    node_id
-                    </Label>
-                    <Col sm={12 - labelWidth}>
-                        <AvField name="node_id" type="text" required />
-                    </Col>
-                </FormGroup>
                 <FormGroup row key="service_id">
                     <Label for="service_id" sm={labelWidth}>
                         service_id
@@ -80,7 +72,15 @@ class ApproveServiceForm extends React.Component {
                     <Col sm={12 - labelWidth}>
                         <AvField name="service_id" type="text" required />
                     </Col>
-                </FormGroup>                
+                </FormGroup>
+                <FormGroup row key="service_name">
+                    <Label for="service_name" sm={labelWidth}>
+                        service_name
+                    </Label>
+                    <Col sm={12 - labelWidth}>
+                        <AvField name="service_name" type="text" required />
+                    </Col>
+                </FormGroup>
                 <Row className="justify-content-center">
                     <Button>Submit</Button>
                     {loading ? (
@@ -105,4 +105,4 @@ class ApproveServiceForm extends React.Component {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ApproveServiceForm);
+)(UpdateServiceForm);

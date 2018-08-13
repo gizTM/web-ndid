@@ -24,22 +24,25 @@ const mapDispatchToProps = dispatch => {
             if (loading) {
                 dispatch(callLoading(loading));
 
-                post("/api/approveService", {
+                post("/api/updateNode", {
                     node_id: value.node_id,
-                    service_id: value.service_id
+                    node_name: value.node_name,
+                    max_aal: value.max_aal,
+                    max_ial: value.max_ial
                 })
                     .then(data => {
                         NotificationManager.success(
-                            "approving service succeeded",
+                            "updating node succeeded",
                             "Form submitted!"
                         );
                         dispatch(callLoading(false));
                     })
                     .catch(err => {
+                        console.log("err: ", JSON.stringify(err));
                         NotificationManager.error(
                             `Status code: ${err.response.status}
                             err.response.data.message`,
-                            "Error approving service",
+                            "Error updating node",
                             5000
                         );
                         dispatch(callLoading(false));
@@ -49,10 +52,14 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-class ApproveServiceForm extends React.Component {
+class UpdateNodeForm extends React.Component {
     render() {
         const labelWidth = 5;
         const { loading, onSubmitClick } = this.props;
+        const defaultValues = {
+            max_aal: 1,
+            max_ial: 1.1
+        };
 
         return (
             <AvForm
@@ -62,25 +69,55 @@ class ApproveServiceForm extends React.Component {
                 onInvalidSubmit={(event, value) =>
                     onSubmitClick(event, value, false)
                 }
+                model={defaultValues}
             >
-                <Label>{MENU.APPROVE_SERVICE}</Label>
+                <Label>{MENU.UPDATE_NODE}</Label>
                 <hr />
                 <FormGroup row key="node_id">
                     <Label for="node_id" sm={labelWidth}>
-                    node_id
+                        node_id
                     </Label>
                     <Col sm={12 - labelWidth}>
                         <AvField name="node_id" type="text" required />
                     </Col>
                 </FormGroup>
-                <FormGroup row key="service_id">
-                    <Label for="service_id" sm={labelWidth}>
-                        service_id
+                <FormGroup row key="node_name">
+                    <Label for="node_name" sm={labelWidth}>
+                    node_name
                     </Label>
                     <Col sm={12 - labelWidth}>
-                        <AvField name="service_id" type="text" required />
+                        <AvField name="node_name" type="text" required />
                     </Col>
-                </FormGroup>                
+                </FormGroup>
+                <FormGroup row key="max_aal">
+                    <Label for="max_aal" sm={labelWidth}>
+                        max_aal
+                    </Label>
+                    <Col sm={12 - labelWidth}>
+                        <AvField type="select" name="max_aal">
+                            <option>1</option>
+                            <option>2.1</option>
+                            <option>2.2</option>
+                            <option>3</option>
+                        </AvField>
+                    </Col>
+                </FormGroup>
+                <FormGroup row key="max_ial">
+                    <Label for="max_ial" sm={labelWidth}>
+                        max_ial
+                    </Label>
+                    <Col sm={12 - labelWidth}>
+                        <AvField type="select" name="max_ial">
+                            <option>1.1</option>
+                            <option>1.2</option>
+                            <option>1.3</option>
+                            <option>2.1</option>
+                            <option>2.2</option>
+                            <option>2.3</option>
+                            <option>3</option>
+                        </AvField>
+                    </Col>
+                </FormGroup>
                 <Row className="justify-content-center">
                     <Button>Submit</Button>
                     {loading ? (
@@ -105,4 +142,4 @@ class ApproveServiceForm extends React.Component {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ApproveServiceForm);
+)(UpdateNodeForm);

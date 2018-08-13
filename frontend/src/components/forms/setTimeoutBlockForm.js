@@ -24,13 +24,12 @@ const mapDispatchToProps = dispatch => {
             if (loading) {
                 dispatch(callLoading(loading));
 
-                post("/api/approveService", {
-                    node_id: value.node_id,
-                    service_id: value.service_id
+                post("/api/setTimeoutBlockRegisterMqDestination", {
+                    blocks_to_timeout: value.blocks_to_timeout
                 })
                     .then(data => {
                         NotificationManager.success(
-                            "approving service succeeded",
+                            "setting timeout block register MQ destination succeeded",
                             "Form submitted!"
                         );
                         dispatch(callLoading(false));
@@ -39,7 +38,7 @@ const mapDispatchToProps = dispatch => {
                         NotificationManager.error(
                             `Status code: ${err.response.status}
                             err.response.data.message`,
-                            "Error approving service",
+                            "Error setting timeout block register MQ destination",
                             5000
                         );
                         dispatch(callLoading(false));
@@ -49,7 +48,7 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-class ApproveServiceForm extends React.Component {
+class SetTimeoutBlockForm extends React.Component {
     render() {
         const labelWidth = 5;
         const { loading, onSubmitClick } = this.props;
@@ -63,24 +62,20 @@ class ApproveServiceForm extends React.Component {
                     onSubmitClick(event, value, false)
                 }
             >
-                <Label>{MENU.APPROVE_SERVICE}</Label>
+                <Label>{MENU.SET_TIMEOUT_BLOCK}</Label>
                 <hr />
-                <FormGroup row key="node_id">
-                    <Label for="node_id" sm={labelWidth}>
-                    node_id
+                <FormGroup row key="blocks_to_timeout">
+                    <Label for="blocks_to_timeout" sm={labelWidth}>
+                        blocks_to_timeout
                     </Label>
                     <Col sm={12 - labelWidth}>
-                        <AvField name="node_id" type="text" required />
+                        <AvField
+                            name="blocks_to_timeout"
+                            type="number"
+                            required
+                        />
                     </Col>
                 </FormGroup>
-                <FormGroup row key="service_id">
-                    <Label for="service_id" sm={labelWidth}>
-                        service_id
-                    </Label>
-                    <Col sm={12 - labelWidth}>
-                        <AvField name="service_id" type="text" required />
-                    </Col>
-                </FormGroup>                
                 <Row className="justify-content-center">
                     <Button>Submit</Button>
                     {loading ? (
@@ -105,4 +100,4 @@ class ApproveServiceForm extends React.Component {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ApproveServiceForm);
+)(SetTimeoutBlockForm);
