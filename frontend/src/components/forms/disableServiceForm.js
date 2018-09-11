@@ -24,12 +24,12 @@ const mapDispatchToProps = dispatch => {
       if (loading) {
         dispatch(callLoading(loading));
 
-        post("/api/deleteService", {
+        post("/api/disableService", {
           service_id: value.service_id
         })
           .then(data => {
             NotificationManager.success(
-              "deleting service succeeded",
+              "disabling service succeeded",
               "Form submitted!"
             );
             dispatch(callLoading(false));
@@ -38,7 +38,7 @@ const mapDispatchToProps = dispatch => {
             NotificationManager.error(
               `Status code: ${err.response.status}
                 err.response.data.message`,
-              "Error deleting service",
+              "Error disabling service",
               5000
             );
             dispatch(callLoading(false));
@@ -48,7 +48,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-class DeleteServiceForm extends React.Component {
+class DisableServiceForm extends React.Component {
   render() {
     const labelWidth = 5;
     const { loading, onSubmitClick } = this.props;
@@ -58,7 +58,7 @@ class DeleteServiceForm extends React.Component {
         onValidSubmit={(event, value) => onSubmitClick(event, value, true)}
         onInvalidSubmit={(event, value) => onSubmitClick(event, value, false)}
       >
-        <Label>{MENU.DELETE_SERVICE}</Label>
+        <Label>{MENU.DISABLE_SERVICE}</Label>
         <hr />
         <FormGroup row key="service_id">
           <Label for="service_id" sm={labelWidth}>
@@ -92,4 +92,4 @@ class DeleteServiceForm extends React.Component {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(DeleteServiceForm);
+)(DisableServiceForm);

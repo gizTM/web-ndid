@@ -324,11 +324,34 @@ app.post('/api/updateService', (req, res) => {
   });
 })
 
-app.post('/api/deleteService', (req, res) => {
+app.post('/api/disableService', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
   //*** */
   // res.send('Success!')
-  axios.delete(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/services/` + req.body.service_id, 
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/services/${req.body.service_id}/disable`, 
+   {
+    headers: {
+      'Content-Type': 'application/json',
+    }, 
+    httpsAgent: agent 
+  })
+  .then(response => {
+    console.log('response: '+response);
+    res.send('Success!')
+  })
+  .catch(error => {
+    console.log('error: ', error.toString());
+    res.status(error.response.status).json({
+      message: (error.response.data && error.response.data.error) ? error.response.data.error.message : error.response.statusText
+    }).end();
+  });
+});
+
+app.post('/api/enableService', (req, res) => {
+  console.log('req.body: '+JSON.stringify(req.body))
+  //*** */
+  // res.send('Success!')
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/services/${req.body.service_id}/enable`, 
    {
     headers: {
       'Content-Type': 'application/json',

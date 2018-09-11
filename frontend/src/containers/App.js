@@ -11,7 +11,8 @@ import DisableNamespaceForm from '../components/forms/disableNamespaceForm'
 import EnableNamespaceForm from '../components/forms/enableNamespaceForm'
 import AddServiceForm from '../components/forms/addServiceForm'
 import UpdateServiceForm from '../components/forms/updateServiceForm'
-import DeleteServiceForm from '../components/forms/deleteServiceForm'
+import DisableServiceForm from '../components/forms/disableServiceForm'
+import EnableServiceForm from '../components/forms/enableServiceForm'
 import ApproveServiceForm from '../components/forms/approveServiceForm'
 import RegisterValidatorForm from '../components/forms/registerValidatorForm'
 import SetTimeoutBlockForm from '../components/forms/setTimeoutBlockForm'
@@ -32,7 +33,8 @@ const menus = [
   MENU.ENABLE_NAMESPACE,
   MENU.ADD_SERVICE,
   MENU.UPDATE_SERVICE,
-  MENU.DELETE_SERVICE,
+  MENU.DISABLE_SERVICE,
+  MENU.ENABLE_SERVICE,
   MENU.APPROVE_SERVICE,
   MENU.REGISTER_VALIDATOR,
   MENU.SET_TIMEOUT_BLOCK
@@ -80,7 +82,8 @@ class App extends Component {
             {this.props.menu === MENU.ENABLE_NAMESPACE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <EnableNamespaceForm /> </Col>}
             {this.props.menu === MENU.ADD_SERVICE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <AddServiceForm  /> </Col>}
             {this.props.menu === MENU.UPDATE_SERVICE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <UpdateServiceForm /> </Col>}
-            {this.props.menu === MENU.DELETE_SERVICE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <DeleteServiceForm /> </Col>}
+            {this.props.menu === MENU.DISABLE_SERVICE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <DisableServiceForm /> </Col>}
+            {this.props.menu === MENU.ENABLE_SERVICE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <EnableServiceForm /> </Col>}
             {this.props.menu === MENU.APPROVE_SERVICE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <ApproveServiceForm /> </Col>}
             {this.props.menu === MENU.REGISTER_VALIDATOR && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <RegisterValidatorForm /> </Col>}
             {this.props.menu === MENU.SET_TIMEOUT_BLOCK && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <SetTimeoutBlockForm /> </Col>}
