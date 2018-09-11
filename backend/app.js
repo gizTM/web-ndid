@@ -395,7 +395,7 @@ app.post('/api/validator', (req, res) => {
 
 app.post('/api/setTimeoutBlockRegisterMqDestination', (req, res) => {
   axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/setTimeoutBlockRegisterMqDestination`, JSON.stringify({
-    blocks_to_timeout: req.body.blocks_to_timeout
+    blocks_to_timeout: parseInt(req.body.blocks_to_timeout)
   }), {
     headers: {
       'Content-Type': 'application/json',
