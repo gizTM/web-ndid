@@ -228,13 +228,35 @@ app.post('/api/addNamespace', (req, res) => {
   });
 });
 
-app.post('/api/deleteNamespace', (req, res) => {
+app.post('/api/disableNamespace', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
   // console.log('req.params: ',JSON.stringify(req.params))
   //*** */
   // res.send('Success!')
-  console.log('deleting namespace')
-  axios.delete(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/namespaces/` + req.body.namespace,
+  console.log('disabling namespace')
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/namespaces/${req.body.namespace}/disable`,
+   {
+    headers: {
+      'Content-Type': 'application/json',
+    }, 
+    httpsAgent: agent 
+  })
+  .then(response => {
+    console.log('response: '+response);
+    res.send('Success!')
+  })
+  .catch(error => {
+    console.log('error: ', error.toString());
+    res.status(error.response.status).json({
+      message: (error.response.data && error.response.data.error) ? error.response.data.error.message : error.response.statusText
+    }).end();
+  });
+});
+
+app.post('/api/enableNamespace', (req, res) => {
+  console.log('req.body: '+JSON.stringify(req.body));
+  console.log('enabling namespace')
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/namespaces/${req.body.namespace}/enable`,
    {
     headers: {
       'Content-Type': 'application/json',

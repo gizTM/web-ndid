@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import InitNDIDForm from '../components/forms/initNDIDForm'
 import RegisterNodeForm from '../components/forms/registerNodeForm'
-import UpdateNodeForm from '../components/forms/updateNodeForm';
+import UpdateNodeForm from '../components/forms/updateNodeForm'
 import SetNodeTokenForm from '../components/forms/setNodeTokenForm'
 import AddNodeTokenForm from '../components/forms/addNodeTokenForm'
 import ReduceNodeTokenForm from '../components/forms/reduceNodeTokenForm'
 import AddNamespaceForm from '../components/forms/addNamespaceForm'
-import DeleteNamespaceForm from '../components/forms/deleteNamespaceForm'
+import DisableNamespaceForm from '../components/forms/disableNamespaceForm'
+import EnableNamespaceForm from '../components/forms/enableNamespaceForm'
 import AddServiceForm from '../components/forms/addServiceForm'
 import UpdateServiceForm from '../components/forms/updateServiceForm'
 import DeleteServiceForm from '../components/forms/deleteServiceForm'
@@ -15,7 +16,7 @@ import ApproveServiceForm from '../components/forms/approveServiceForm'
 import RegisterValidatorForm from '../components/forms/registerValidatorForm'
 import SetTimeoutBlockForm from '../components/forms/setTimeoutBlockForm'
 import { connect } from 'react-redux'
-import { Sidebar, SidebarItem } from 'react-responsive-sidebar';
+import { Sidebar, SidebarItem } from 'react-responsive-sidebar'
 import { selectMenu } from '../actions/menuAction'
 import { MENU } from '../constants'
 
@@ -27,7 +28,8 @@ const menus = [
   MENU.ADD_NODE_TOKEN,
   MENU.REDUCE_NODE_TOKEN,
   MENU.ADD_NAMESPACE,
-  MENU.DELETE_NAMESPACE,
+  MENU.DISABLE_NAMESPACE,
+  MENU.ENABLE_NAMESPACE,
   MENU.ADD_SERVICE,
   MENU.UPDATE_SERVICE,
   MENU.DELETE_SERVICE,
@@ -74,7 +76,8 @@ class App extends Component {
             {this.props.menu === MENU.ADD_NODE_TOKEN && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <AddNodeTokenForm /> </Col>}
             {this.props.menu === MENU.REDUCE_NODE_TOKEN && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <ReduceNodeTokenForm /> </Col>}
             {this.props.menu === MENU.ADD_NAMESPACE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <AddNamespaceForm /> </Col>}
-            {this.props.menu === MENU.DELETE_NAMESPACE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <DeleteNamespaceForm /> </Col>}
+            {this.props.menu === MENU.DISABLE_NAMESPACE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <DisableNamespaceForm /> </Col>}
+            {this.props.menu === MENU.ENABLE_NAMESPACE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <EnableNamespaceForm /> </Col>}
             {this.props.menu === MENU.ADD_SERVICE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <AddServiceForm  /> </Col>}
             {this.props.menu === MENU.UPDATE_SERVICE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <UpdateServiceForm /> </Col>}
             {this.props.menu === MENU.DELETE_SERVICE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <DeleteServiceForm /> </Col>}
