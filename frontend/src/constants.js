@@ -8,10 +8,12 @@ export const MENU = {
     DISABLE_NAMESPACE: 'Disable namespace',
     ENABLE_NAMESPACE: 'Enable namespace',
     ADD_SERVICE: 'Add service',
+    UPDATE_SERVICE: 'Update service',
     DISABLE_SERVICE: 'Disable service',
     ENABLE_SERVICE: 'Enable service',
     APPROVE_SERVICE: 'Approve service',
-    UPDATE_SERVICE: 'Update service',
+    DISABLE_SERVICE_DESTINATION: 'Disable service destination',
+    ENABLE_SERVICE_DESTINATION: 'Enable service destination',
     REGISTER_VALIDATOR: 'Register validator',
     INIT_NDID: 'Init NDID',
     SET_TIMEOUT_BLOCK: 'Set timeout block register MQ destination'

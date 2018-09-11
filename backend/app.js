@@ -76,6 +76,56 @@ app.post('/api/approveService', (req, res) => {
   });
 })
 
+app.post('/api/disableServiceDestination', (req, res) => {
+  console.log('req.body: ' + JSON.stringify(req.body));
+
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/disableServiceDestination`, JSON.stringify({
+    node_id: req.body.node_id,
+    service_id: req.body.service_id
+  }), {
+    headers: {
+      'Content-Type': 'application/json',
+    }, httpsAgent: agent 
+  })
+  .then(response => {
+    console.log('response: ' + response);
+    res.send('Success!')
+  })
+  .catch(error => {
+    console.log('error message: ', error.toString());
+    console.log('error: ', error)
+    console.log('')
+    res.status(error.response.status).json({
+      message: (error.response.data && error.response.data.error) ? error.response.data.error.message : error.response.statusText
+    }).end();
+  });
+})
+
+app.post('/api/enableServiceDestination', (req, res) => {
+  console.log('req.body: ' + JSON.stringify(req.body));
+
+  axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/enableServiceDestination`, JSON.stringify({
+    node_id: req.body.node_id,
+    service_id: req.body.service_id
+  }), {
+    headers: {
+      'Content-Type': 'application/json',
+    }, httpsAgent: agent 
+  })
+  .then(response => {
+    console.log('response: ' + response);
+    res.send('Success!')
+  })
+  .catch(error => {
+    console.log('error message: ', error.toString());
+    console.log('error: ', error)
+    console.log('')
+    res.status(error.response.status).json({
+      message: (error.response.data && error.response.data.error) ? error.response.data.error.message : error.response.statusText
+    }).end();
+  });
+})
+
 app.post('/api/registerNode', (req, res) => {
   console.log('req.body: '+JSON.stringify(req.body))
   //*** */

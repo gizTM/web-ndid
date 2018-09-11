@@ -14,6 +14,8 @@ import UpdateServiceForm from '../components/forms/updateServiceForm'
 import DisableServiceForm from '../components/forms/disableServiceForm'
 import EnableServiceForm from '../components/forms/enableServiceForm'
 import ApproveServiceForm from '../components/forms/approveServiceForm'
+import DisableServiceDestinationForm from '../components/forms/disableServiceDestinationForm'
+import EnableServiceDestinationForm from '../components/forms/enableServiceDestinationForm'
 import RegisterValidatorForm from '../components/forms/registerValidatorForm'
 import SetTimeoutBlockForm from '../components/forms/setTimeoutBlockForm'
 import { connect } from 'react-redux'
@@ -36,6 +38,8 @@ const menus = [
   MENU.DISABLE_SERVICE,
   MENU.ENABLE_SERVICE,
   MENU.APPROVE_SERVICE,
+  MENU.DISABLE_SERVICE_DESTINATION,
+  MENU.ENABLE_SERVICE_DESTINATION,
   MENU.REGISTER_VALIDATOR,
   MENU.SET_TIMEOUT_BLOCK
 ]
@@ -85,6 +89,8 @@ class App extends Component {
             {this.props.menu === MENU.DISABLE_SERVICE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <DisableServiceForm /> </Col>}
             {this.props.menu === MENU.ENABLE_SERVICE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <EnableServiceForm /> </Col>}
             {this.props.menu === MENU.APPROVE_SERVICE && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <ApproveServiceForm /> </Col>}
+            {this.props.menu === MENU.DISABLE_SERVICE_DESTINATION && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <DisableServiceDestinationForm /> </Col>}
+            {this.props.menu === MENU.ENABLE_SERVICE_DESTINATION && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <EnableServiceDestinationForm /> </Col>}
             {this.props.menu === MENU.REGISTER_VALIDATOR && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <RegisterValidatorForm /> </Col>}
             {this.props.menu === MENU.SET_TIMEOUT_BLOCK && <Col sm="9" md={{ size: 6, offset: 1 }} style={style}> <SetTimeoutBlockForm /> </Col>}
           </Row>
