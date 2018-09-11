@@ -82,11 +82,11 @@ app.post('/api/registerNode', (req, res) => {
   // res.send('Success!')
   axios.post(`http${config.ndidApiHttps ? 's' : ''}://${config.ndidApiIp}:${config.ndidApiPort}/ndid/registerNode`, JSON.stringify({
     node_id: req.body.node_id,
-    public_key: req.body.public_key,
-    master_public_key: req.body.master_public_key,
+    node_key: req.body.node_key,
+    node_master_key: req.body.node_master_key,
     role: req.body.role,
-    max_aal: parseFloat(req.body.max_aal),
-    max_ial: parseFloat(req.body.max_ial),
+    max_aal: req.body.role === 'idp' ? parseFloat(req.body.max_aal) : undefined,
+    max_ial: req.body.role === 'idp' ? parseFloat(req.body.max_ial) : undefined,
     node_name: req.body.node_name
   }), {
     headers: {

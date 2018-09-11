@@ -27,8 +27,8 @@ const mapDispatchToProps = dispatch => {
         post("/api/registerNode", {
           node_id: value.node_id,
           node_name: value.node_name,
-          public_key: value.public_key,
-          master_public_key: value.master_public_key,
+          node_key: value.node_key,
+          node_master_key: value.node_master_key,
           role: value.role,
           max_aal: value.max_aal,
           max_ial: value.max_ial
@@ -89,20 +89,20 @@ class RegisterNodeForm extends React.Component {
               <AvField name="node_name" type="text" required />
             </Col>
           </FormGroup>
-          <FormGroup row key="public_key">
-            <Label for="public_key" sm={labelWidth}>
-              public_key
+          <FormGroup row key="node_key">
+            <Label for="node_key" sm={labelWidth}>
+            node_key
             </Label>
             <Col sm={12 - labelWidth}>
-              <AvField name="public_key" type="textarea" required />
+              <AvField name="node_key" type="textarea" required />
             </Col>
           </FormGroup>
-          <FormGroup row key="master_public_key">
-            <Label for="master_public_key" sm={labelWidth}>
-              master_public_key
+          <FormGroup row key="node_master_key">
+            <Label for="node_master_key" sm={labelWidth}>
+              node_master_key
             </Label>
             <Col sm={12 - labelWidth}>
-              <AvField name="master_public_key" type="textarea" required />
+              <AvField name="node_master_key" type="textarea" required />
             </Col>
           </FormGroup>
           <FormGroup row key="role">
