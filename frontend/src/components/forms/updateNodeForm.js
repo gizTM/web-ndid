@@ -27,8 +27,8 @@ const mapDispatchToProps = dispatch => {
         post("/api/updateNode", {
           node_id: value.node_id,
           node_name: value.node_name,
-          max_aal: value.max_aal,
-          max_ial: value.max_ial
+          max_aal: parseFloat(value.max_aal),
+          max_ial: parseFloat(value.max_ial)
         })
           .then(data => {
             NotificationManager.success(
