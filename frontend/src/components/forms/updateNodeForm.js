@@ -40,8 +40,7 @@ const mapDispatchToProps = dispatch => {
           .catch(err => {
             console.log("err: ", JSON.stringify(err));
             NotificationManager.error(
-              `Status code: ${err.response.status}
-                err.response.data.message`,
+              `Status code: ${err.response.status} - ${(err.response.data && err.response.data.message) || 'Unknown Error'}`,
               "Error updating node",
               5000
             );

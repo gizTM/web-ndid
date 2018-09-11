@@ -38,8 +38,7 @@ const mapDispatchToProps = dispatch => {
           })
           .catch(err => {
             NotificationManager.error(
-              `Status code: ${err.response.status}
-                err.response.data.message`,
+              `Status code: ${err.response.status} - ${(err.response.data && err.response.data.message) || 'Unknown Error'}`,
               "Error setting node token",
               5000
             );
